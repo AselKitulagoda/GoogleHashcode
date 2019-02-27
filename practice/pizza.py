@@ -1,6 +1,29 @@
 import numpy as np
 import sys
 import os
+#return coordinates of slice
+def getRowSlice(pizza,startI,startJ):
+    sliceCount = 0
+    tomatoCount = 0
+    mushroomCount = 0
+    a = -1
+    b = -1
+    for i in range(startI,len(pizza)):
+        for j in range(startJ,len(pizza[0])):
+            sliceCount += 1
+            if(pizza[i][j] == 'T'):
+                tomatoCount += 1
+            if(pizza[i][j] == 'M'):
+                mushroomCount += 1
+            if(sliceCount > H and (tomatoCount < L or mushroomCount < L)):
+                return -1,-1
+            if(tomatoCount >= L and mushroomCount >= L):
+                if(sliceCount == H):
+                    return i,j
+    return -1,-1
+def getColSlice(pizza,startI,startJ):
+    i,j = getRowSlice(pizza.transpose(),startJ,startI)
+    return j,i
 filename = sys.argv[1]
 pizzaMat = []
 f = open(filename,"r")
@@ -21,27 +44,31 @@ pizza = np.array(pizzaMat)
 print(pizza.transpose())
 results = []
 slices = 0
-endI = 0
-endJ = 0
-while(endI != intR - 1):
-    print()
-#return coordinates of slice
-def getRowSlice(pizza,startI,startJ):
-    sliceCount = 0
-    tomatoCount = 0
-    mushroomCount = 0
-    for i in range(startI,len(pizza)):
-        for j in range(startJ,len(pizza[0])):
-            sliceCount += 1
-            if(pizza[i][j] == 'T'):
-                tomatoCount += 1
-            if(pizza[i][j] == 'M'):
-                mushroomCount += 1
-            if(sliceCount > H and (tomatoCount < L or mushroomCount < L)):
-                return None
-            if(tomatoCount >= L and mushroomCount >= L):
-                if(sliceCount == H):
-                    return i,j
-def getColSlice(pizza,startI,startJ):
-    i,j = getRowSlice(pizza.transpose(),startJ,startI)
-    return j,i
+i = 0
+j = 0
+print("R = " + str(R))
+print("C = " + str(C))
+while(i < R  or j < C):
+    print("i = " + str(i))
+    print("j = " + str(j))
+    rowI,rowJ = getRowSlice(pizza,i,j)
+    colI,colJ = getColSlice(pizza,i,j)
+    print("rowI = " + str(rowI))
+    print("rowJ = " + str(rowJ))
+    print("colI = " + str(colI))
+    print("colJ = " + str(colJ))
+    if(colI != -1):
+        #found valid row slice
+        print()
+        result = [i,j,colI,colJ]
+        results.append(result)
+        j = colJ + 1
+    elif(rowI != -1):
+        result = [i,j,rowI,rowJ]
+        results.append(result)
+        i = rowI + 1
+    else:
+        #skip the cell ?
+        i += 1
+        j += 1
+print(results)
