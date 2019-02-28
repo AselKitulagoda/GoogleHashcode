@@ -33,42 +33,48 @@ R = int(vals[0])
 C = int(vals[1])
 L = int(vals[2])
 H = int(vals[3])
-print(vals)
-print(L)
-print(H)
+# print(vals)
+# print(L)
+# print(H)
 for x in f:
     line = list(x.strip())
     pizzaMat.append(line)
-print(pizzaMat)
+#print(pizzaMat)
 pizza = np.array(pizzaMat)
-print(pizza.transpose())
+# print(pizza.transpose())
 results = []
 slices = 0
 i = 0
 j = 0
-print("R = " + str(R))
-print("C = " + str(C))
+# print("R = " + str(R))
+# print("C = " + str(C))
 while(i < R  or j < C):
-    print("i = " + str(i))
-    print("j = " + str(j))
+    # print("i = " + str(i))
+    # print("j = " + str(j))
     rowI,rowJ = getRowSlice(pizza,i,j)
     colI,colJ = getColSlice(pizza,i,j)
-    print("rowI = " + str(rowI))
-    print("rowJ = " + str(rowJ))
-    print("colI = " + str(colI))
-    print("colJ = " + str(colJ))
+    # print("rowI = " + str(rowI))
+    # print("rowJ = " + str(rowJ))
+    # print("colI = " + str(colI))
+    # print("colJ = " + str(colJ))
     if(colI != -1):
         #found valid row slice
-        print()
+    #    print()
         result = [i,j,colI,colJ]
         results.append(result)
         j = colJ + 1
+        slices += 1
     elif(rowI != -1):
         result = [i,j,rowI,rowJ]
         results.append(result)
         i = rowI + 1
+        slices += 1
     else:
         #skip the cell ?
         i += 1
         j += 1
+f = open("outputC.txt","w+")
+f.write(str(slices) + "\n")
+for result in results:
+    f.write("%d %d %d %d\n"%(result[0],result[1],result[2],result[3]))
 print(results)
