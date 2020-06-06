@@ -32,7 +32,7 @@
 
 
 ### Pre-requisites
-* You need to have ***Python 3*** installed on your machine, follow this [guide](https://realpython.com/installing-python/) to instal Python.
+* You need to have ***Python 3*** installed on your machine, follow this [guide](https://realpython.com/installing-python/) to install Python.
 
 ### How to Run
 
