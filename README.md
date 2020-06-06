@@ -26,7 +26,7 @@
 * If the slide contains a single horizontal photo, the tags of the slide are the same as the tags of the single photo it contains.
 * If the slide contains two ve ical photos, the tags of the slide are all the tags present in any or both of the two photos it contains.
 * Each photo can be used either once or not at all. The slideshow must have at least one slide.
-* For more information on the Hashcode 2019 problem look [pizzapracticeproblem.pdf](hashcode2019/Hashcodeproblem.pdf).
+* For more information on the Hashcode 2019 problem look [Hashcodeproblem.pdf](hashcode2019/Hashcodeproblem.pdf).
 
 
 
